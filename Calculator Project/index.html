@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.js"
+        integrity=
+"sha512-BbVEDjbqdN3Eow8+empLMrJlxXRj5nEitiCAK5A1pUr66+jLVejo3PmjIaucRnjlB0P9R3rBUs3g5jXc8ti+fQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"
+        integrity=
+"sha512-iphNRh6dPbeuPGIrQbCdbBF/qcqadKWLa35YPVfMZMHBSI6PLJh1om2xCTWhpVpmUyb4IvVS9iYnnYMkleVXLA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Scientific Calculator</title>
+</head>
+<body>
+    <h1>A simple Calculator</h1>
+    <h3>Using HTML, CSS and JavaScript</h3>
+    <div class="calculator">
+        <input type="text" class="display" readonly>
+        <div>
+            <button class="button" onclick="dis('1')" onkeydown="keyHandler(event)">1</button>
+            <button class="button" onclick="dis('2')" onkeydown="keyHandler(event)">2</button>
+            <button class="button" onclick="dis('3')" onkeydown="keyHandler(event)">3</button>
+            <button class="button operator" onclick="dis('+')" onkeydown="keyHandler(event)">+</button>
+        </div>
+        <div>
+            <button class="button" onclick="dis('4')" onkeydown="keyHandler(event)">4</button>
+            <button class="button" onclick="dis('5')" onkeydown="keyHandler(event)">5</button>
+            <button class="button" onclick="dis('6')" onkeydown="keyHandler(event)">6</button>
+            <button class="button operator" onclick="dis('-')" onkeydown="keyHandler(event)">-</button>
+        </div>
+        <div>
+            <button class="button" onclick="dis('7')" onkeydown="keyHandler(event)">7</button>
+            <button class="button" onclick="dis('8')" onkeydown="keyHandler(event)">8</button>
+            <button class="button" onclick="dis('9')" onkeydown="keyHandler(event)">9</button>
+            <button class="button operator" onclick="dis('*')" onkeydown="keyHandler(event)">*</button>
+        </div>
+        <div>
+            <button class="button" onclick="dis('0')" onkeydown="keyHandler(event)">0</button>
+            <button class="button operator" onclick="dis('^')" onkeydown="keyHandler(event)">^</button>
+            <button class="button operator" onclick="dis('/')" onkeydown="keyHandler(event)">/</button>
+            <button class="button operator" id="clear"  style="background-color: #ff4500;" onclick="clear()">C</button>
+        </div>
+        <button class="button operator" style="background-color: #3bb143; width: 50%;" onclick="solve()">=</button>
+        <button class="button operator" style="background-color: #ff4500; width: 30%;" onclick="del()">DEL</button>
+    </div>
+    <script>
+        const dis=(val)=>{
+            document.getElementsByClassName("display")[0].value+=val;
+        }
+        const btnVal=['0','1','2','3','4','5','6','7','8','9','+','-','^','/','*'];
+        const keyHandler=(event)=>{
+            for(i=0;i<btnVal.length;i++){
+                if(event.key==btnVal[i]){
+                    document.getElementsByClassName("display")[0].value+=event.key;
+                }
+            }
+        }
+        const solve=()=>{
+            let x=document.getElementsByClassName("display")[0].value;
+            let y=math.evaluate(x);
+            document.getElementsByClassName("display")[0].value=y;
+        }
+        const display=document.getElementsByClassName("display")[0];
+        const clearBtn=document.getElementById("clear");
+        clearBtn.addEventListener("click",()=>{
+            display.value="";
+        })
+        const del=()=>{
+            var display=document.getElementsByClassName("display")[0];
+            display.value=display.value.slice(0,-1);
+        }
+    </script>
+</body>
+</html>
